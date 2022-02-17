@@ -6,25 +6,19 @@ import aioredis
 from plugins.bot import Bot
 from plugins.logic import generate_video
 from plugins.queue import Queue
+from plugins.config import cfg
 
 logging.basicConfig(level=logging.DEBUG)
 log = logging.getLogger(__name__)
 
 log.setLevel(logging.DEBUG)
 
-bot = Bot(token="2079006861:AAHbMFZld6q-edr5zPdxGaXNqLxQdtykiKY")
+bot = Bot(token=cfg.app.constants.bot_token)
 
-redis = aioredis.from_url("redis://localhost", decode_responses=True)
+redis = aioredis.from_url(cfg.app.hosts.redis.url, decode_responses=True)
 
 
 async def start_working():
-    # TODO возможно стоит передавать байты внутри
-    # на вход получаем file_id кадров которые нужно сшить
-    # нужен еще chat_id
-    # photos_file_ids = ['AgACAgIAAxkDAAEBEVNiAsMVZh92OQPBqifQTr-ENNeKywACtL4xG232EUjb8sAcBDqS0QEAAwIAA3kAAyME',
-    #                    'AgACAgIAAxkDAAEBEVRiAsMWKFp23QtIE1bagPrwUBOwMQAC174xG232EUjkBQjYPvJ9YQEAAwIAA3kAAyME',
-    #                    'AgACAgIAAxkDAAEBEVViAsMXBjnLPYURuacguVZLNlRFNQAC2L4xG232EUjpLL-Ppvq8tgEAAwIAA3kAAyME',
-    #                    'AgACAgIAAxkDAAEBEVZiAsMY6hyralne56bX_2_QY6xqQgAC2b4xG232EUgcgxGRfVCrLwEAAwIAA3kAAyME']
 
     while True:
 

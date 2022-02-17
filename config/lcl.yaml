@@ -1,0 +1,11 @@
+app:
+  constants:
+    timeout_for_chat: 100
+    debug: False
+    use_black_list: True
+    numbers_of_attemp: 10
+    bot_token: 2079006861:AAHbMFZld6q-edr5zPdxGaXNqLxQdtykiKY
+    default_model: version 2
+  hosts:
+    redis:
+      url: redis://redis
