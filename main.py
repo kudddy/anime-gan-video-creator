@@ -31,7 +31,9 @@ async def start_working():
         if len(data) > 0:
             log.info("start working")
             chat_id = data.pop("chat_id")
-            print(data)
+
+            log.debug("getting message from queue = {}".format(data))
+
             try:
 
                 photos_file_ids = {int(k): v for k, v in data.items()}
