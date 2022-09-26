@@ -6,14 +6,12 @@ import cv2
 import numpy as np
 
 from plugins.bot import ServiceBot, Bot
+from plugins.config import cfg
 
-from plugins.bot import ServiceBot, Bot
 
-bot = Bot(token="2079006861:AAHbMFZld6q-edr5zPdxGaXNqLxQdtykiKY")
-
+bot = Bot(token=cfg.app.constants.bot_token)
 logging.basicConfig(level=logging.DEBUG)
 log = logging.getLogger(__name__)
-
 log.setLevel(logging.DEBUG)
 
 context = ssl._create_unverified_context()

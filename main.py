@@ -10,7 +10,6 @@ from plugins.config import cfg
 
 logging.basicConfig(level=logging.DEBUG)
 log = logging.getLogger(__name__)
-
 log.setLevel(logging.DEBUG)
 
 bot = Bot(token=cfg.app.constants.bot_token)
@@ -30,20 +29,23 @@ async def start_working():
 
         if len(data) > 0:
             log.info("start working")
+
             chat_id = data.pop("chat_id")
+
+            await bot.messaging.send_message(chat_id=chat_id, text="Начинаю сводить видео! осталось совсем чуть-чуть🫣")
 
             log.debug("getting message from queue = {}".format(data))
 
             try:
 
                 photos_file_ids = {int(k): v for k, v in data.items()}
-
                 photos_file_ids = list({k: photos_file_ids[k] for k in sorted(photos_file_ids)}.values())
-
                 video_bytes = await generate_video(photos_file_ids=photos_file_ids)
 
                 log.info("job completed successfully")
                 log.info("sending message with chat_id - {}".format(chat_id))
+
+                await bot.messaging.send_message(chat_id=chat_id, text="Видео готово! Держи🐲")
 
                 bot.messaging.send_video_bytes(chat_id=chat_id, video_bytes=video_bytes)
 
